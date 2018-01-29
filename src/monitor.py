@@ -11,6 +11,7 @@ def job(options):
     if pag["status"] != "OK":
         print("pag failed")
         logger.warn("pag failed.")
+        print(pag)
         cmd = [ options["nssm_exe"], "restart", options["xmr_service"] ]
         oput = subprocess.check_output(cmd) #, shell=True)
         print(oput)
@@ -29,21 +30,25 @@ def get_web_page(url, http_method="GET"):
                     content: the web page html content in cas of success or the error in case of error.
     """
     status = "FAILURE"
+    status_code = -1
     try:
         if (http_method.lower().strip() == 'get'):
             resp = requests.get(url)
         else:
             resp = requests.post(url)
-        content = resp.content()
-        if resp.status_code == 200:
+        content = resp.content
+        status_code = resp.status_code
+        if status_code == 200:
             status = "OK"
         return {
             "status": status,
+            "status_code": status_code,
             "content": content
             }
     except Exception as ex:
         return {
             "status": status,
+            "status_code": status_code,
             "content": str(ex)
         }
 
