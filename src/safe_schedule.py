@@ -30,16 +30,16 @@ class SafeScheduler(Scheduler):
         """
         self.reschedule_on_failure = reschedule_on_failure
         # # este super es pra python 3
-        #super().__init__()
+        super().__init__()
         # # para python 2 usar el super asi
-        Scheduler.__init__(self)
+        #Scheduler.__init__(self)
 
     def _run_job(self, job):
         try:
             # # este super es pra python 3
-            #super()._run_job(job)
+            super()._run_job(job)
             # # para python 2 usar el run asi
-            Scheduler._run_job(self, job)
+            #Scheduler._run_job(self, job)
 
         except Exception:
             logger.error(format_exc())

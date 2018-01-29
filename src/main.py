@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-import ConfigParser
+import configparser #ConfigParser
 import getopt
 import logging
 import os
@@ -12,7 +12,7 @@ import time
 from monitor import job
 
 def usage():
-    print """Modo de empleo: python main.py [-h]'
+    print("""Modo de empleo: python main.py [-h]'
         o bien: python main.py [--help]'
         o bien: python main.py [-i <archivo.ini>]'
         o bien: python main.py [--ini=<archivo.ini>]'
@@ -24,7 +24,7 @@ Opciones:'
   -i <archivo>    Especifica un archivo ini de configuracion.'
   -ini <archivo>  Especifica un archivo ini de configuracion.'
   -ini=<archivo>  Especifica un archivo ini de configuracion.'
-"""
+""")
 
 def main():
     try:
@@ -56,13 +56,14 @@ def main():
         if not os.path.isfile(file_ini):
             msg = "No se encuentra el archivo " + str(file_ini) + ", se carga la configuracion default"
             logger.error(msg)
-        cp = ConfigParser.ConfigParser()
+        #cp = ConfigParser.ConfigParser()
+        cp = configparser.ConfigParser()
         cp._sections = configdefault
         cp.read(file_ini)
 
         options = cp._sections
 
-        print options
+        print(options)
 
         scheduler = SafeScheduler()
         scheduler.every(5).minutes.do(job, options["DEFAULT"])

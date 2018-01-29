@@ -5,15 +5,17 @@ import subprocess
 
 def job(options):
     logger = logging.getLogger('xmr-stak-monitor')
-    print "ww"
+    print ("ww")
     logger.warn("I'm working...")
     pag = get_web_page(options["xmr_url"])
     if pag["status"] != "OK":
+        print("pag failed")
         logger.warn("pag failed.")
         cmd = [ options["nssm_exe"], "restart", options["xmr_service"] ]
         oput = subprocess.check_output(cmd) #, shell=True)
-        print oput
+        print(oput)
     else:
+        print("pag ok.")
         logger.warn("pag ok.")
 
 def get_web_page(url, http_method="GET"):
