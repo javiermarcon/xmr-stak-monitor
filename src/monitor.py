@@ -7,7 +7,7 @@ def job(options):
     logger = logging.getLogger('xmr-stak-monitor')
     print ("ww")
     logger.warn("I'm working...")
-    pag = get_web_page(options["xmr_url"])
+    pag = get_web_page("{}/h".format(options["xmr_url"]))
     if pag["status"] != "OK":
         print("pag failed")
         logger.warn("pag failed.")
