@@ -1,23 +1,21 @@
-
+import datetime
 import logging
 import requests
 import subprocess
 
 def job(options):
     logger = logging.getLogger('xmr-stak-monitor')
-    print ("ww")
-    logger.warn("I'm working...")
+    logger.info("I'm working...")
     pag = get_web_page("{}/h".format(options["xmr_url"]))
     if pag["status"] != "OK":
-        print("pag failed")
-        logger.warn("pag failed.")
+        logger.warn("page failed at {}.".format(datetime.datetime.now()))
         print(pag)
-        cmd = [ options["nssm_exe"], "restart", options["xmr_service"] ]
-        oput = subprocess.check_output(cmd) #, shell=True)
-        print(oput)
+        cmd = [ 'runas', '/user:Administrator', options["nssm_exe"], "restart", options["xmr_service"] ]
+        subprocess.call(cmd) #, shell=True)
+        time.sleep(120)
+        subprocess.call(cmd) #, shell=True)
     else:
-        print("pag ok.")
-        logger.warn("pag ok.")
+        logger.info("pag ok.")
 
 def get_web_page(url, http_method="GET"):
     """
@@ -26,7 +24,7 @@ def get_web_page(url, http_method="GET"):
     :param http_method: string with the method to use ("GET" or "POST")
     :return: a dictionary with:
                     state: "ok" or "failure"
-
+					status_code: http response number (200=ok, 404=not found, etc.)
                     content: the web page html content in cas of success or the error in case of error.
     """
     status = "FAILURE"

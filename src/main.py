@@ -62,14 +62,13 @@ def main():
         cp.read(file_ini)
 
         options = cp._sections
-
-        print(options)
+        #print(options)
 
         scheduler = SafeScheduler()
         scheduler.every(5).minutes.do(job, options["DEFAULT"])
         while True:
             scheduler.run_pending()
-            time.sleep(10)
+            time.sleep(30)
 
     # argument errors
     except getopt.GetoptError:
