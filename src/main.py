@@ -9,6 +9,8 @@ import string
 import sys
 import time
 
+__version__ = '0.0.1'
+
 from monitor import job
 
 def usage():
@@ -88,8 +90,8 @@ def main():
     finally:
         if msg:
             logger.error(msg)
-            exit(1)
-        exit(0)
+            sys.exit(1)
+        sys.exit(0)
 
 if __name__ == "__main__":
-    exit(main())
+    sys.exit(main())
