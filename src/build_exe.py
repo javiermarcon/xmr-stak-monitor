@@ -15,7 +15,8 @@ executables = [Executable("main.py",
 packages = ['logging', 'getopt', 'sys', 'string', 
 			'datetime', 'requests', 'schedule', 
 			'traceback', 'subprocess', 'sys',
-			'idna' 
+			'idna', 'eventlet', 'os', 'time',
+            'locale', 'dns'
 							]
 options = {
     'build_exe': {
