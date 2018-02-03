@@ -1,0 +1,24 @@
+2018-02-02 23:57:47,838 INFO 	 I'm working...
+2018-02-02 23:57:47,838 INFO 	 I'm working...
+2018-02-02 23:57:47,838 DEBUG 	 Inicio Request (GET)a http://192.168.1.233:8900/h
+2018-02-02 23:57:47,838 DEBUG 	 Inicio Request (GET)a http://192.168.1.233:8900/h
+2018-02-02 23:57:47,869 DEBUG 	 Fin request Get
+2018-02-02 23:57:47,869 DEBUG 	 Fin request Get
+2018-02-02 23:57:47,869 DEBUG 	 status:OK resp_code200
+2018-02-02 23:57:47,869 DEBUG 	 status:OK resp_code200
+2018-02-02 23:57:47,869 DEBUG 	 got page
+2018-02-02 23:57:47,869 DEBUG 	 got page
+2018-02-02 23:57:47,869 DEBUG 	 pag ok.
+2018-02-02 23:57:47,869 DEBUG 	 pag ok.
+2018-02-02 23:59:23,591 INFO 	 I'm working...
+2018-02-02 23:59:23,591 INFO 	 I'm working...
+2018-02-02 23:59:23,591 DEBUG 	 Inicio Request (GET)a http://192.168.1.233:8900/h
+2018-02-02 23:59:23,591 DEBUG 	 Inicio Request (GET)a http://192.168.1.233:8900/h
+2018-02-02 23:59:23,622 DEBUG 	 Fin request Get
+2018-02-02 23:59:23,622 DEBUG 	 Fin request Get
+2018-02-02 23:59:23,622 DEBUG 	 status:OK resp_code200
+2018-02-02 23:59:23,622 DEBUG 	 status:OK resp_code200
+2018-02-02 23:59:23,622 DEBUG 	 got page
+2018-02-02 23:59:23,622 DEBUG 	 got page
+2018-02-02 23:59:23,622 DEBUG 	 pag ok.
+2018-02-02 23:59:23,622 DEBUG 	 pag ok.
