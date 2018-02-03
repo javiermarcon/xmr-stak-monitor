@@ -80,39 +80,27 @@ def main():
 
     # argument errors
     except getopt.GetoptError:
-        logger.error("error getopt")
         usage()
     # config errors
     except cpo.MissingSectionHeaderError as e:
-        logger.error("error 1")
         msg = "El archivo de configuracion {} es invalido, no contiene secciones. {}".format(file_ini, str(e))
+        logger.error(msg)
     except cpo.ParsingError as e:
-        logger.error("error 2")
         msg = "El archivo de configuracion {} es invalido, no se puede parsear. {}".format(file_ini, str(e))
+        logger.error(msg)
     except cpo.Error as e:
-        logger.error("error 3")
         msg = "Error al leer el archivo de configuracion {}. {}".format(file_ini, str(e))
+        logger.error(msg)
     # exit
     except KeyboardInterrupt:
-        logger.error("error 4")
-        logger.info("Bye...")
-        logger.error("bye ctrl+c")
+        logger.info("bye ctrl+c")
     # Timeout del checker
     except eventlet.timeout.Timeout:
         do_restart(options, logger)
     # general exception
     except Exception as e:
-        logger.error("error 5")
         msg = "Error general: {}".format(e)
-        print(msg)
         logger.error(msg)
-    """finally:
-        logger.error("finally..")
-        if msg:
-            print(msg)
-            logger.error(msg)
-            sys.exit(1)
-        sys.exit(0)"""
 
 if __name__ == "__main__":
     sys.exit(main())

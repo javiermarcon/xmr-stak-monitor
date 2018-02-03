@@ -2,25 +2,21 @@ import datetime
 import eventlet
 import os
 import requests
-import time
 import subprocess
 
 def do_restart(options, logger):
     nspath = os.path.abspath(options["nssm_exe"]).replace('\\', '\\\\')
     cmd = [nspath, "restart", options["xmr_service"]]
     logger.debug("primer call: {}".format(" ".join(cmd)))
-    print("B")
     ejecuto(cmd, logger)
-    print("c")
-    
+
 def ejecuto(cmd, logger):
     try:
         logger.debug("inicio_exe")
         subprocess.run(cmd, check=False)
-        print("z")
+        # Para python2 usar subprocess.call(cmd)
         logger.debug("fin exe")
     except Exception as ee:
-        print ("zz")
         logger.debug(ee)
 
 def job(options, logger):
