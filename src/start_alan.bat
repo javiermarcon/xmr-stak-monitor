@@ -1,0 +1,1 @@
+C:\Users\Alan\AppData\Local\Programs\Python\Python36\python.exe main.py
