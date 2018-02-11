@@ -1,15 +1,13 @@
 #! /usr/bin/env python
-
+from config import get_default_options, load_config
 import eventlet
 import getopt
 from loggerfunc import loguear
+from monitor import job, do_restart, make_paths_and_urls
 import sys
 import time
 
 __version__ = '0.0.1'
-
-from monitor import job, do_restart
-from config import get_default_options, load_config
 
 def usage():
     print("""Modo de empleo: python main.py [-h]'
@@ -42,14 +40,13 @@ def main():
                 usage()
             elif opt in ("-c", "--config"):
                 file_config = arg
-
         options = load_config(file_config, logger)
-
         logger = loguear(options["log"])
+        (nspath, urls) = make_paths_and_urls(options)
         while True:
             #scheduler.run_pending()
-            job(options["service"], logger)
-            time.sleep(int(options["service"]["sleep_time"]))
+            job(urls, nspath, int(options["common"]["page_timeout"]), logger)
+            time.sleep(int(options["common"]["sleep_time"]))
 
     # argument errors
     except getopt.GetoptError:

@@ -1,15 +1,25 @@
 {
-    "log": {
-        "backup_count": 5,
-        "filename": "monitor.log",
-        "level": "DEBUG",
-        "max_bytes": 500000000
+  "log": {
+    "backup_count": 5,
+    "filename": "monitor.log",
+    "level": "DEBUG",
+    "max_bytes": 500000000
+  },
+  "common": {
+    "nssm_exe": "../../nssm-2.24/win64/nssm.exe",
+    "page_timeout": 20,
+    "sleep_time": 300
+  },
+  "services": [
+    {
+      "xmr_service": "xmrig",
+      "xmr_url": "http://127.0.0.1:8900",
+      "type": "xmrig"
     },
-    "service": {
-        "nssm_exe": "../../nssm-2.24/win64/nssm.exe",
-        "page_timeout": 20,
-        "sleep_time": 300,
-        "xmr_service": "xmr-stak",
-        "xmr_url": "http://127.0.0.1:80"
+    {
+      "xmr_service": "xmrig-amd",
+      "xmr_url": "http://127.0.0.1:8901",
+      "type": "xmrig"
     }
+  ]
 }

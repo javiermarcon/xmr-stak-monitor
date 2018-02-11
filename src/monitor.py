@@ -1,16 +1,26 @@
 import datetime
 import eventlet
+import json
 import os
 import requests
 import subprocess
 
-def do_restart(options, logger):
-    nspath = os.path.abspath(options["nssm_exe"]).replace('\\', '\\\\')
-    cmd = [nspath, "restart", options["xmr_service"]]
-    logger.debug("primer call: {}".format(" ".join(cmd)))
-    ejecuto(cmd, logger)
+def make_paths_and_urls(options):
+    nspath = os.path.abspath(options["common"]["nssm_exe"]).replace('\\', '\\\\')
+    urls = {}
+    for service in options["services"]:
+        if not "type" in service:
+            service["type"] = "xmrig"
+        check_content = True
+        if str(service["type"]).lower().strip() != "xmrig":
+            check_content = False
+            service["xmr_url"] = "{}/h".format(service["xmr_url"])
+        urls[service["xmr_service"]] = (service["xmr_url"], check_content)
+    return (nspath, urls)
 
-def ejecuto(cmd, logger):
+def do_restart(nspath, svc, logger):
+    cmd = [nspath, "restart", svc]
+    logger.debug("primer call: {}".format(" ".join(cmd)))
     try:
         logger.debug("inicio_exe")
         subprocess.run(cmd, check=False)
@@ -19,21 +29,20 @@ def ejecuto(cmd, logger):
     except Exception as ee:
         logger.debug(ee)
 
-def job(options, logger):
-    logger.info("I'm working...")
-    url = "{}/h".format(options["xmr_url"])
-    pag = get_web_page(url, logger, int(options["page_timeout"]))
-    logger.debug("got page")
-    if pag["status"] != "OK":
-        logger.debug("not ok..")
-        logger.warn("page failed at {}.".format(datetime.datetime.now()))
-        logger.debug(pag)
-        print ("a")
-        do_restart(options, logger)
-        print("e")
-        logger.debug("segundo call")
-    else:
-        logger.debug("pag ok.")
+def job(urls, nspath, page_timeout, logger):
+    logger.debug("I'm working...")
+    for svc in urls:
+        (url, check_content) = urls[svc]
+        pag = get_web_page(url, logger, page_timeout)
+        logger.debug("got page {} for {}".format(url, svc))
+        http_content_ok = check_http_content(pag["content"], check_content)
+        if pag["status"] != "OK" or not http_content_ok:
+            logger.warn("page failed at {}.".format(datetime.datetime.now()))
+            logger.debug(pag)
+            do_restart(nspath, svc, logger)
+            logger.debug("segundo call")
+        else:
+            logger.debug("pag ok.")
 
 def get_web_page(url, logger, timeout=10, http_method="GET"):
     """
@@ -50,7 +59,7 @@ def get_web_page(url, logger, timeout=10, http_method="GET"):
     logger.debug("Inicio Request ({})a {}".format(http_method, url))
     try:
         eventlet.monkey_patch()
-        with eventlet.Timeout(10):
+        with eventlet.Timeout(timeout):
             if (http_method.lower().strip() == 'get'):
                 resp = requests.get(url, verify=False)
                 logger.debug("Fin request Get") 
@@ -76,3 +85,12 @@ def get_web_page(url, logger, timeout=10, http_method="GET"):
             "content": str(ex)
         }
 
+def check_http_content(response, do_check):
+    if not do_check:
+        print(response, do_check)
+        return True
+    jresp = json.loads(response)
+    for thread in jresp["hashrate"]["threads"]:
+        if thread[0] == 0.0:
+            return False
+    return True
