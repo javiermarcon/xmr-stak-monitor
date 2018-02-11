@@ -1,55 +1,38 @@
 #! /usr/bin/env python
 
-import configparser as cpo #ConfigParser en python 2
 import eventlet
 import getopt
 from loggerfunc import loguear
-import os
 import sys
 import time
 
 __version__ = '0.0.1'
 
 from monitor import job, do_restart
+from config import get_default_options, load_config
 
 def usage():
     print("""Modo de empleo: python main.py [-h]'
         o bien: python main.py [--help]'
-        o bien: python main.py [-i <archivo.ini>]'
-        o bien: python main.py [--ini=<archivo.ini>]'
-        o bien: python main.py [--ini <archivo.ini>]'
+        o bien: python main.py [-c <archivo.ini>]'
+        o bien: python main.py [--config=<archivo.ini>]'
+        o bien: python main.py [--config <archivo.ini>]'
 
 Opciones:'
   -h              Muestra el modo de empleo y opciones del conector.'
   --help          Muestra el modo de empleo y opciones del conector.'
-  -i <archivo>    Especifica un archivo ini de configuracion.'
-  -ini <archivo>  Especifica un archivo ini de configuracion.'
-  -ini=<archivo>  Especifica un archivo ini de configuracion.'
+  -d <archivo>    Especifica un archivo ini de configuracion.'
+  -config <archivo>  Especifica un archivo ini de configuracion.'
+  -config=<archivo>  Especifica un archivo ini de configuracion.'
 """)
 
 def main():
     try:
         # Default INI file
-        file_ini = 'config.ini'
+        file_config = 'config.json'
 
-        # default config
-        options = { "service": {
-            "xmr_service": "xmr-stak", # xmr-stak service running
-            "xmr_url": "http://127.0.0.1:80",
-            "nssm_exe": "../../nssm-2.24/win64/nssm.exe", # nssm executable
-            "sleep_time": 300,
-            "page_timeout": 20
-            },
-            "log":{
-                "filename": "monitor.log",
-                "level": "DEBUG",
-                "max_bytes": 500000000,
-                "backup_count": 5
-            }
-        }
-
+        options = get_default_options()
         msg = ""
-
         logger = loguear(options["log"])
 
         # leo argumentos de linea de comandos
@@ -57,21 +40,11 @@ def main():
         for opt, arg in opts:
             if opt in ('-h', "--help"):
                 usage()
-            elif opt in ("-i", "--ini"):
-                if arg.endswith(".ini"):
-                    file_ini = arg
-                else:
-                    usage()
+            elif opt in ("-c", "--config"):
+                file_config = arg
 
-        # parse ini configuration
-        if not os.path.isfile(file_ini):
-            msg = "No se encuentra el archivo " + str(file_ini) + ", se carga la configuracion default"
-            logger.error(msg)
-        cp = cpo.ConfigParser()
-        cp._sections = options
-        cp.read(file_ini)
+        options = load_config(file_config, logger)
 
-        options = cp._sections
         logger = loguear(options["log"])
         while True:
             #scheduler.run_pending()
@@ -81,15 +54,9 @@ def main():
     # argument errors
     except getopt.GetoptError:
         usage()
-    # config errors
-    except cpo.MissingSectionHeaderError as e:
-        msg = "El archivo de configuracion {} es invalido, no contiene secciones. {}".format(file_ini, str(e))
-        logger.error(msg)
-    except cpo.ParsingError as e:
-        msg = "El archivo de configuracion {} es invalido, no se puede parsear. {}".format(file_ini, str(e))
-        logger.error(msg)
-    except cpo.Error as e:
-        msg = "Error al leer el archivo de configuracion {}. {}".format(file_ini, str(e))
+    # config error
+    except ValueError as e:
+        msg = "Error al leer el archivo de configuracion {}. {}".format(file_config, str(e))
         logger.error(msg)
     # exit
     except KeyboardInterrupt:
