@@ -16,15 +16,15 @@ executables = [Executable("main.py",
 						icon='monitor.ico')]
 
 packages = ['logging', 'getopt', 'sys', 'string', 
-			'datetime', 'requests', 'schedule', 
+			'datetime', 'requests', 'greenlet',
 			'traceback', 'subprocess', 'sys',
 			'idna', 'eventlet', 'os', 'time',
-            'locale', 'certifi', 'urllib3', 'greenlet'
-							]
+            'locale', 'certifi', 'urllib3',
+			'json']
 options = {
     'build_exe': {
         'packages': packages,
-        'include_files': ['config.ini'],
+        'include_files': ['config.json'],
     },
 
 }

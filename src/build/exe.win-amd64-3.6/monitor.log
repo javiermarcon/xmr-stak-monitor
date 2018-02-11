@@ -1,24 +1,44 @@
-2018-02-02 23:57:47,838 INFO 	 I'm working...
-2018-02-02 23:57:47,838 INFO 	 I'm working...
-2018-02-02 23:57:47,838 DEBUG 	 Inicio Request (GET)a http://192.168.1.233:8900/h
-2018-02-02 23:57:47,838 DEBUG 	 Inicio Request (GET)a http://192.168.1.233:8900/h
-2018-02-02 23:57:47,869 DEBUG 	 Fin request Get
-2018-02-02 23:57:47,869 DEBUG 	 Fin request Get
-2018-02-02 23:57:47,869 DEBUG 	 status:OK resp_code200
-2018-02-02 23:57:47,869 DEBUG 	 status:OK resp_code200
-2018-02-02 23:57:47,869 DEBUG 	 got page
-2018-02-02 23:57:47,869 DEBUG 	 got page
-2018-02-02 23:57:47,869 DEBUG 	 pag ok.
-2018-02-02 23:57:47,869 DEBUG 	 pag ok.
-2018-02-02 23:59:23,591 INFO 	 I'm working...
-2018-02-02 23:59:23,591 INFO 	 I'm working...
-2018-02-02 23:59:23,591 DEBUG 	 Inicio Request (GET)a http://192.168.1.233:8900/h
-2018-02-02 23:59:23,591 DEBUG 	 Inicio Request (GET)a http://192.168.1.233:8900/h
-2018-02-02 23:59:23,622 DEBUG 	 Fin request Get
-2018-02-02 23:59:23,622 DEBUG 	 Fin request Get
-2018-02-02 23:59:23,622 DEBUG 	 status:OK resp_code200
-2018-02-02 23:59:23,622 DEBUG 	 status:OK resp_code200
-2018-02-02 23:59:23,622 DEBUG 	 got page
-2018-02-02 23:59:23,622 DEBUG 	 got page
-2018-02-02 23:59:23,622 DEBUG 	 pag ok.
-2018-02-02 23:59:23,622 DEBUG 	 pag ok.
+2018-02-11 19:17:09,933 DEBUG 	 I'm working...
+2018-02-11 19:17:09,933 DEBUG 	 Inicio Request (GET)a http://127.0.0.1:8900
+2018-02-11 19:17:09,949 DEBUG 	 Fin request Get
+2018-02-11 19:17:09,964 DEBUG 	 status:OK resp_code200
+2018-02-11 19:17:09,964 DEBUG 	 got page http://127.0.0.1:8900 for xmrig
+2018-02-11 19:17:09,964 DEBUG 	 pag ok.
+2018-02-11 19:17:09,964 DEBUG 	 Inicio Request (GET)a http://127.0.0.1:8901
+2018-02-11 19:17:09,964 DEBUG 	 Fin request Get
+2018-02-11 19:17:09,964 DEBUG 	 status:OK resp_code200
+2018-02-11 19:17:09,964 DEBUG 	 got page http://127.0.0.1:8901 for xmrig-amd
+2018-02-11 19:17:09,964 DEBUG 	 pag ok.
+2018-02-11 19:22:09,971 DEBUG 	 I'm working...
+2018-02-11 19:22:09,971 DEBUG 	 Inicio Request (GET)a http://127.0.0.1:8900
+2018-02-11 19:22:09,971 DEBUG 	 Fin request Get
+2018-02-11 19:22:09,971 DEBUG 	 status:OK resp_code200
+2018-02-11 19:22:09,971 DEBUG 	 got page http://127.0.0.1:8900 for xmrig
+2018-02-11 19:22:09,971 DEBUG 	 pag ok.
+2018-02-11 19:22:09,971 DEBUG 	 Inicio Request (GET)a http://127.0.0.1:8901
+2018-02-11 19:22:09,971 DEBUG 	 Fin request Get
+2018-02-11 19:22:09,971 DEBUG 	 status:OK resp_code200
+2018-02-11 19:22:09,971 DEBUG 	 got page http://127.0.0.1:8901 for xmrig-amd
+2018-02-11 19:22:09,971 DEBUG 	 pag ok.
+2018-02-11 19:27:09,975 DEBUG 	 I'm working...
+2018-02-11 19:27:09,975 DEBUG 	 Inicio Request (GET)a http://127.0.0.1:8900
+2018-02-11 19:27:09,975 DEBUG 	 Fin request Get
+2018-02-11 19:27:09,975 DEBUG 	 status:OK resp_code200
+2018-02-11 19:27:09,975 DEBUG 	 got page http://127.0.0.1:8900 for xmrig
+2018-02-11 19:27:09,975 DEBUG 	 pag ok.
+2018-02-11 19:27:09,975 DEBUG 	 Inicio Request (GET)a http://127.0.0.1:8901
+2018-02-11 19:27:09,975 DEBUG 	 Fin request Get
+2018-02-11 19:27:09,975 DEBUG 	 status:OK resp_code200
+2018-02-11 19:27:09,975 DEBUG 	 got page http://127.0.0.1:8901 for xmrig-amd
+2018-02-11 19:27:09,975 DEBUG 	 pag ok.
+2018-02-11 19:32:09,979 DEBUG 	 I'm working...
+2018-02-11 19:32:09,979 DEBUG 	 Inicio Request (GET)a http://127.0.0.1:8900
+2018-02-11 19:32:09,979 DEBUG 	 Fin request Get
+2018-02-11 19:32:09,979 DEBUG 	 status:OK resp_code200
+2018-02-11 19:32:09,979 DEBUG 	 got page http://127.0.0.1:8900 for xmrig
+2018-02-11 19:32:09,979 DEBUG 	 pag ok.
+2018-02-11 19:32:09,979 DEBUG 	 Inicio Request (GET)a http://127.0.0.1:8901
+2018-02-11 19:32:09,979 DEBUG 	 Fin request Get
+2018-02-11 19:32:09,979 DEBUG 	 status:OK resp_code200
+2018-02-11 19:32:09,979 DEBUG 	 got page http://127.0.0.1:8901 for xmrig-amd
+2018-02-11 19:32:09,979 DEBUG 	 pag ok.
