@@ -1,12 +1,13 @@
+import chardet
 import datetime
 import eventlet
 import json
 import os
 import requests
+#import shlex
 import subprocess
 import threading
 import traceback
-#import shlex
 
 class Command(object):
     """
@@ -98,14 +99,20 @@ class Monitor():
             self.logger.debug("inicio_exe")
             (a, b, c) = self.jobs[svc]["cmd_restart"].run(timeout=self.timeout)
             self.logger.debug(a)
-            self.logger.debug(b)
-            self.logger.debug(c)
+            self.logger.debug(self.bytes_decoder(b))
+            self.logger.debug(self.bytes_decoder(c))
             #os.system(joined_cmd)
             #subprocess.run(cmd, check=False)
             # Para python2 usar subprocess.call(cmd)
             self.logger.debug("fin exe")
         except Exception as ee:
             self.logger.debug(ee)
+
+    def bytes_decoder(self, byte_string):
+        if byte_string == b'':
+            return ''
+        enc = chardet.detect(byte_string)
+        return byte_string.decode(enc['encoding'])
 
     def run(self):
         self.logger.debug("I'm working...")
