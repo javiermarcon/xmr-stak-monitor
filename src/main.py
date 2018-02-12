@@ -3,7 +3,7 @@ from config import get_default_options, load_config
 import eventlet
 import getopt
 from loggerfunc import loguear
-from monitor import job, do_restart, make_paths_and_urls
+from monitor import Monitor
 import sys
 import time
 
@@ -42,10 +42,10 @@ def main():
                 file_config = arg
         options = load_config(file_config, logger)
         logger = loguear(options["log"])
-        (nspath, urls) = make_paths_and_urls(options)
+        monitor = Monitor(options, logger)
         while True:
             #scheduler.run_pending()
-            job(urls, nspath, int(options["common"]["page_timeout"]), logger)
+            monitor.run()
             time.sleep(int(options["common"]["sleep_time"]))
 
     # argument errors
@@ -59,8 +59,8 @@ def main():
     except KeyboardInterrupt:
         logger.info("bye ctrl+c")
     # Timeout del checker
-    except eventlet.timeout.Timeout:
-        do_restart(options, logger)
+    #except eventlet.timeout.Timeout:
+    #    monitor.do_restart(options, logger)
     # general exception
     except Exception as e:
         msg = "Error general: {}".format(e)
